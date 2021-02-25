@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <form [formGroup]="alunoForm" (submit)="alunoSubmit()">
+    <form [formGroup]="alunoForm">
       <div class="form-group">
         <label for="formGroupNome">Nome</label>
         <input type="text" formControlName="nome" class="form-control">
@@ -29,8 +29,10 @@
       </div>
     </form>
   </div>
+
   <div [ngClass]="{'col-sm-6': alunoSelecionado, 'col-sm-12': !alunoSelecionado}">
     <app-titulo [titulo]="titulo"></app-titulo>
+
     <table class="table table-hover">
       <thead class="table-dark">
         <tr>
@@ -50,7 +52,7 @@
           <td>
             <div class="btn-group">
               <button (click)="alunoSelect(aluno)" class="btn btn-sm btn-warning">Detalhe</button>
-              <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Professores</button>
+              <button (click)="openModal(template, aluno.id)" class="btn btn-sm btn-outline-primary">Professores</button>
               <button class="btn btn-sm btn-danger">Desativar</button>
             </div>
           </td>
@@ -58,6 +60,7 @@
       </tbody>
     </table>
   </div>
+
 </div>
 
 

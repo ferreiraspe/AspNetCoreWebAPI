@@ -66,7 +66,7 @@ namespace SmartSchool.WebAPI.Data
                 query = query.Where(aluno => aluno.Nome
                                                  .ToUpper()
                                                  .Contains(pageParams.Nome.ToUpper()) ||
-                                             aluno.SobreNome
+                                                 aluno.SobreNome
                                                  .ToUpper()
                                                  .Contains(pageParams.Nome.ToUpper()));
 
