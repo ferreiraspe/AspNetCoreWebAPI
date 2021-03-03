@@ -1,67 +1,24 @@
-<div class="row">
+<div>
+  <app-titulo [titulo]="titulo"></app-titulo>
 
-  <div class="col-sm-6" *ngIf="professorSelecionado">
-    <div class="row">
-      <div class="col-sm-10">
-        <app-titulo [titulo]="'Cód. Professor: ' + professorSelecionado.id"></app-titulo>
-      </div>
-      <div class="col-sm-2">
-        <button type="button" class="btn btn-outline-danger" (click)="voltar()">Fechar</button>
-      </div>
-    </div>
-
-    <form [formGroup]="professorForm" (submit)="professorSubmit()">
-      <div class="form-group">
-        <label for="formGroupNome">Nome</label>
-        <input type="text" formControlName="nome" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="formGroupDisciplina">Disciplina</label>
-        <input type="text" formControlName="disciplina" class="form-control">
-      </div>
-      <div class="form-group">
-        <hr>
-        <button class="btn-success" [disabled]="!professorForm.valid">Enviar</button>
-      </div>
-    </form>
-  </div>
-  <div [ngClass]="{'col-sm-6': professorSelecionado, 'col-sm-12': !professorSelecionado}">
-    <app-titulo [titulo]="titulo"></app-titulo>
-    <table class="table table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Disciplina</th>
-          <th scope="col">Opções</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let professor of professores">
-          <th scope="row">{{professor.id}}</th>
-          <td>{{professor.nome}}</td>
-          <td>{{professor.disciplina}}</td>
-          <td>
-            <div class="btn-group">
-              <button (click)="professorSelect(professor)" class="btn btn-sm btn-warning">Detalhe</button>
-              <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">alunos</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th> Visualizar</th>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Disciplina</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prof of professores">
+        <td>
+          <a [routerLink]="['/professor/', prof.id]" class="text-dark btn btn-sm btn-outline-warning">Detalhe</a>
+        </td>
+        <th scope="row">{{prof.id}}</th>
+        <td>{{prof.nome}}</td>
+        <td>{{disciplinaConcat(prof.disciplinas)}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-<ng-template #template>
-  <div class="modal-body">
-    <app-alunos></app-alunos>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn pull-right" aria-label="Close" (click)="modalRef.hide()">
-      Fechar
-    </button>
-  </div>
-</ng-template>
-
-

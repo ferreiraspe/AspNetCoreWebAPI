@@ -34,7 +34,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
         }
 
         /// <summary>
-        /// Método responsável por retornar todos os meus alunos
+        /// Método responsável por retornar todos os alunos
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -47,6 +47,17 @@ namespace SmartSchool.WebAPI.V1.Controllers
             Response.AddPagination(alunos.CurrentPage, alunos.PageSize, alunos.TotalCount, alunos.TotalPages);
 
             return Ok(alunosResult);
+        }
+
+        /// <summary>
+        /// Método responsável por retornar Disciplina por aluno.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ByDisciplina/{id}")]
+        public async Task<IActionResult> GetByDisciplinaId(int id)
+        {
+            var result = await Repo.GetAllAlunosByDisciplinaIdAsync(id, false);
+            return Ok(result);
         }
 
         /// <summary>
@@ -70,7 +81,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
             var aluno = Repo.GetAlunoById(id, false);
             if (aluno == null) return BadRequest("O aluno não foi encontrado!");
 
-            var alunoDto = Mapper.Map<AlunoDto>(aluno);
+            var alunoDto = Mapper.Map<AlunoPatchDto>(aluno);
 
             return Ok(alunoDto);
         }
@@ -124,7 +135,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoRegistrarDto model)
+        public IActionResult Patch(int id, AlunoPatchDto model)
         {
             var aluno = Repo.GetAlunoById(id);
             if (aluno == null) return BadRequest("Aluno não encontrado");
@@ -134,7 +145,31 @@ namespace SmartSchool.WebAPI.V1.Controllers
             Repo.Update(aluno);
             if (Repo.SaveChange())
             {
-                return Created($"/api/aluno/{model.Id}", Mapper.Map<AlunoDto>(aluno));
+                return Created($"/api/aluno/{model.Id}", Mapper.Map<AlunoPatchDto>(aluno));
+            }
+
+            return BadRequest("Aluno não atualizado!");
+        }
+
+        /// <summary>
+        /// Método responsável pela troca do estado: Ativo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}/trocarEstado")]
+        public IActionResult trocarEstado(int id, TrocaEstadoDto trocaEstado)
+        {
+            var aluno = Repo.GetAlunoById(id);
+            if (aluno == null) return BadRequest("Aluno não encontrado");
+
+            aluno.Ativo = trocaEstado.Estado;
+
+            Repo.Update(aluno);
+            if (Repo.SaveChange())
+            {
+                var msn = aluno.Ativo ? "ativado" : "desativado";
+                return Ok(new { message = $"Aluno {msn} com sucesso" });
             }
 
             return BadRequest("Aluno não atualizado!");

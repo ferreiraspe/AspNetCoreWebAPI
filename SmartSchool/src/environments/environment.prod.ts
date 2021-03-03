@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  UrlPrincipal: 'http://sejafullstack.com'
+  mainUrlAPI: 'http://localhost:5000/api/v1/'
 };

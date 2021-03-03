@@ -22,7 +22,7 @@ namespace SmartSchool.WebAPI.Helpers
             this.AddRange(items);
         }
 
-        public static async Task<PageList<T>> CreatAsync(
+        public static async Task<PageList<T>> CreateAsync(
             IQueryable<T> source, int pageNumber, int pageSize)
         {
             var count = await source.CountAsync();

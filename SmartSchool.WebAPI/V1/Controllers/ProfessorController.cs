@@ -59,7 +59,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
         [HttpGet("{Id}")]
         public IActionResult GetById(int id)
         {
-            var professor = Repo.GetProfessorById(id, false);
+            var professor = Repo.GetProfessorById(id, true);
             if (professor == null) return BadRequest("O professor não foi encontrado!");
 
             var professorDto = Mapper.Map<ProfessorDto>(professor);
@@ -67,14 +67,14 @@ namespace SmartSchool.WebAPI.V1.Controllers
             return Ok(professor);
         }
 
-        // [HttpGet("byaluno/{alunoId}")]
-        // public IActionResult GetByAlunoId(int alunoId)
-        // {
-        //     var professores = Repo.GetProfessoresByAlunoId(alunoId, true);
-        //     if (professores == null) return BadRequest("Professores não encontrados!");
+        [HttpGet("byaluno/{alunoId}")]
+        public IActionResult GetByAlunoId(int alunoId)
+        {
+            var professores = Repo.GetProfessoresByAlunoId(alunoId, true);
+            if (professores == null) return BadRequest("Professores não encontrados!");
 
-        //     return Ok(Mapper.Map<IEnumerable<ProfessorDto>>(professores));
-        // }
+            return Ok(Mapper.Map<IEnumerable<ProfessorDto>>(professores));
+        }
 
         /// <summary>
         /// 

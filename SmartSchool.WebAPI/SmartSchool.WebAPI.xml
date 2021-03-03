@@ -18,7 +18,13 @@
         </member>
         <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Get(SmartSchool.WebAPI.Helpers.PageParams)">
             <summary>
-            Método responsável por retornar todos os meus alunos
+            Método responsável por retornar todos os alunos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetByDisciplinaId(System.Int32)">
+            <summary>
+            Método responsável por retornar Disciplina por aluno.
             </summary>
             <returns></returns>
         </member>
@@ -50,9 +56,17 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoPatchDto)">
             <summary>
             Método responsável pela atualização de um aluno
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.trocarEstado(System.Int32,SmartSchool.WebAPI.V1.Dtos.TrocaEstadoDto)">
+            <summary>
+            Método responsável pela troca do estado: Ativo
             </summary>
             <param name="id"></param>
             <param name="model"></param>
@@ -120,6 +134,41 @@
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Id">
+            <summary>
+            Identificador e chave do Banco
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Matricula">
+            <summary>
+            Chave do aluno, para outros negócios na Instituição
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Nome">
+            <summary>
+            Nome é o Primeiro nome e o Sobrenome do Aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Telefone">
+            <summary>
+            Telefone do aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Idade">
+            <summary>
+            Está idade é o calculo relacionado a data de nascimento do aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.DataIni">
+            <summary>
+            Data da matrícula do aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Ativo">
+            <summary>
+            Indida se a matrícula está ativa ou não
+            </summary>
         </member>
         <member name="T:SmartSchool.WebAPI.V2.Controllers.AlunoController">
             <summary>
